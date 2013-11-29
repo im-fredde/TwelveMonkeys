@@ -12,11 +12,13 @@ import java.util.Locale;
 
 /**
  * EPSImageReaderSpi
- *
- * @author <a href="mailto:fredrik@teamleader.se">Fredrik Gusatfsson</a>
  */
 public class EPSImageReaderSpi extends ImageReaderSpi
 {
+    public static final byte[] EPS_HEADER = {'%', '!', 'P', 'S', '-', 'A', 'd', 'o', 'b', 'e'};
+
+    public static final byte[] EPS_TIFF_HEADER = {(byte) 0xc5, (byte) 0xd0, (byte) 0xd3, (byte) 0xc6};
+
 
     /**
      * Creates a {@code EPSImageReaderSpi}.
@@ -33,7 +35,7 @@ public class EPSImageReaderSpi extends ImageReaderSpi
                 providerInfo.getVendorName(),
                 providerInfo.getVersion(),
                 new String[]{"eps", "EPS", "ps", "PS", "ai", "AI"},
-                new String[]{"eps","ps","ai"},
+                new String[]{"eps", "ps", "ai"},
                 new String[]{
                         "application/eps", "application/postscript"
                 },
@@ -51,14 +53,15 @@ public class EPSImageReaderSpi extends ImageReaderSpi
     }
 
 
-
     public boolean canDecodeInput(final Object pSource) throws IOException
     {
         if (!(pSource instanceof ImageInputStream)) {
             return false;
         }
 
-        return true;
+        ImageInputStream imageInputStream = (ImageInputStream) pSource;
+
+        return checkEpsData(imageInputStream);
     }
 
 
@@ -72,4 +75,25 @@ public class EPSImageReaderSpi extends ImageReaderSpi
     {
         return "Encapsulated PostScript (EPS) image reader";
     }
+
+
+    private boolean checkEpsData(ImageInputStream imageInputStream)
+            throws IOException
+    {
+        byte header[] = new byte[EPS_HEADER.length];
+        boolean check = true;
+
+        imageInputStream.read(header);
+
+        for (int i = 0; i < header.length; i++) {
+            if (header[i] != EPS_HEADER[i]) {
+                check = false;
+            }
+        }
+        return check;
+
+    }
+
+
+
 }
