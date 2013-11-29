@@ -499,14 +499,14 @@ public class EPSImageReader extends ImageReaderBase
     @Override
     public int getThumbnailWidth(final int imageIndex, final int thumbnailIndex) throws IOException
     {
-        return 0;
+        return readThumbnail(imageIndex, thumbnailIndex).getWidth();
     }
 
 
     @Override
     public int getThumbnailHeight(final int imageIndex, final int thumbnailIndex) throws IOException
     {
-        return 0;
+        return readThumbnail(imageIndex, thumbnailIndex).getHeight();
     }
 
 

@@ -17,8 +17,8 @@ import java.util.List;
 public class EPSMetadata extends IIOMetadata
 {
     static final boolean standardMetadataFormatSupported = false;
-    static final String nativeMetadataFormatName = "com.spectotechnologies.imageio.plugins.eps.EPSMetaData_1.0";
-    static final String nativeMetadataFormatClassName = "com.spectotechnologies.imageio.plugins.eps.EPSMetaData";
+    static final String nativeMetadataFormatName = "javax_imageio_eps_image_1.0";
+    static final String nativeMetadataFormatClassName = "com.twelvemonkeys.imageio.plugins.eps.EPSMetaData";
     static final String[] extraMetadataFormatNames = null;
     static final String[] extraMetadataFormatClassNames = null;
 
