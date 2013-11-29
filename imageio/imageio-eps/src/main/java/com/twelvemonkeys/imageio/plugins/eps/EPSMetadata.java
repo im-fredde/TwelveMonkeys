@@ -137,10 +137,10 @@ public class EPSMetadata extends IIOMetadata
         {
             // Set the name of the root node
             // The root node has a single child node type that may repeat
-            super("com.spectotechnologies.imageio.plugins.eps.EPSMetaData_1.0",CHILD_POLICY_REPEAT);
+            super(nativeMetadataFormatName,CHILD_POLICY_REPEAT);
 
             // Set up the “KeywordValuePair” node, which has no children
-            addElement("KeywordValuePair","com.spectotechnologies.imageio.plugins.eps.EPSMetaData_1.0",CHILD_POLICY_EMPTY);
+            addElement("KeywordValuePair",nativeMetadataFormatName,CHILD_POLICY_EMPTY);
 
             // Set up attribute “keyword” which is a String that is required
             // and has no default value
